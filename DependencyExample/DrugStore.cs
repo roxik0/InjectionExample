@@ -6,8 +6,8 @@
         {
             public decimal GetAllGoodsValue()
             {
-                return new HardwareCalculator(new MsSqlDatabase()).CalculateSum()+
-                    new DrugCalculator(new MsSqlDatabase()).CalculateSum();
+                return new HardwareCalculator(new AzureDatabase()).CalculateSum()+
+                    new DrugCalculator(new AzureDatabase()).CalculateSum();
             } 
         }
     }
