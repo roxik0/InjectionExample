@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections;
-
-namespace DependencyExample
+﻿namespace DependencyExample
 {
-    public class HardwareCalculator
+    public class DrugCalculator
     {
         private readonly IRepository _repository;
 
-        public HardwareCalculator(IRepository repository)
+        public DrugCalculator(IRepository repository)
         {
             _repository = repository;
         }
         public decimal CalculateSum()
         {
-            var listOfGood =_repository.GetDrugs();
+            var listOfGood = _repository.GetDrugs();
             decimal sum = 0;
             foreach (var item in listOfGood)
             {

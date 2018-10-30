@@ -5,13 +5,16 @@ using System.Threading.Tasks;
 
 namespace DependencyExample
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
-            var sum=new GoodCalculator(new Database()).CalculateSum();
-            Console.WriteLine(sum);
+            Console.WriteLine("Lekarstwa:" + new DrugCalculator(new Database()).CalculateSum());
+            Console.WriteLine("Sprzęt Medyczny:" + new HardwareCalculator(new Database()).CalculateSum());
+            Console.WriteLine("Wartość Sklepu:" + new DrugStore().GetAllGoodsValue());
+
             Console.ReadKey();
+            
 
         }
     }

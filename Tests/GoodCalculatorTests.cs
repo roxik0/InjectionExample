@@ -12,14 +12,14 @@ namespace Tests
         [TestMethod]
         public void CalculateTest()
         {
-            var mockedRepository = new Mock<IGoodRepository>();
-            mockedRepository.Setup(p => p.GetGoods()).Returns(new List<Good>()
+            var mockedRepository = new Mock<IRepository>();
+            mockedRepository.Setup(p => p.GetDrugs()).Returns(new List<Good>()
             {
                 new Good(){Price = 112},
                 new Good(){Price = 113},
             });
             var expected = 225;
-            var result= new GoodCalculator(mockedRepository.Object).CalculateSum();
+            var result= new DrugCalculator(mockedRepository.Object).CalculateSum();
 
             Assert.AreEqual(expected,result);
         }
