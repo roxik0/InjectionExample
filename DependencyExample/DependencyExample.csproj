@@ -46,7 +46,7 @@
     <Compile Include="DrugCalculator.cs" />
     <Compile Include="DrugStore.cs" />
     <Compile Include="Good.cs" />
-    <Compile Include="GoodCalculator.cs" />
+    <Compile Include="HardwareCalculator.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

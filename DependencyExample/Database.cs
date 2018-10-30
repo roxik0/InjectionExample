@@ -18,9 +18,9 @@ namespace DependencyExample
         {
             return new List<Good>()
             {
-                new Good(){ Name="Strzykawka", Price= 56},
-                new Good(){ Name="Wata", Price= 200},
-                new Good(){ Name="Igła", Price= 30},
+                new Good(){ Name="Strzykawka", Price= 1},
+                new Good(){ Name="Wata", Price= 1},
+                new Good(){ Name="Igła", Price= 1},
             };
         }
     }

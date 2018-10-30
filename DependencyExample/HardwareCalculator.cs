@@ -13,7 +13,7 @@ namespace DependencyExample
         }
         public decimal CalculateSum()
         {
-            var listOfGood =_repository.GetDrugs();
+            var listOfGood =_repository.GetHardware();
             decimal sum = 0;
             foreach (var item in listOfGood)
             {
