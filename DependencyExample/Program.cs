@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ninject;
 
 namespace DependencyExample
 {
@@ -9,17 +10,15 @@ namespace DependencyExample
     {
         static void Main(string[] args)
         {
-#if DEBUG
-            ApplicationDependency.CurrentRepository = new MsSqlDatabase();
-#else
-           ApplicationDependency.CurrentRepository = new AzureDatabase();
-#endif
+            IKernel myApp=new StandardKernel();
+
+            IKernel myAzure = new StandardKernel();
+            myAzure.Bind<IRepository>().To<AzureDatabase>();
 
 
-
-            Console.WriteLine("Lekarstwa:" + new DrugCalculator(ApplicationDependency.CurrentRepository).CalculateSum());
-            Console.WriteLine("Sprzęt Medyczny:" + new HardwareCalculator(ApplicationDependency.CurrentRepository).CalculateSum());
-            Console.WriteLine("Wartość Sklepu:" + new DrugStore().GetAllGoodsValue());
+            Console.WriteLine("Lekarstwa:" + new DrugCalculator(myApp.Get<IRepository>()).CalculateSum());
+            Console.WriteLine("Sprzęt Medyczny:" + new HardwareCalculator(myAzure.Get<IRepository>()).CalculateSum());
+            Console.WriteLine("Wartość Sklepu:" + new DrugStore(myApp.Get<IRepository>()).GetAllGoodsValue());
 
             Console.ReadKey();
             
@@ -27,8 +26,5 @@ namespace DependencyExample
         }
     }
 
-    public static class ApplicationDependency
-    {
-        public static IRepository CurrentRepository;
-    }
+  
 }
