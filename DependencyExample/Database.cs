@@ -2,15 +2,15 @@
 
 namespace DependencyExample
 {
-    public class Database
+    public class Database:IGoodRepository
     {
-        internal List<Good> GetGoods()
+        public IEnumerable<Good> GetGoods()
         {
             return new List<Good>()
             {
-                    new Good(){ Name="DB_Mefedron", Price= 56},
-                    new Good(){ Name="DB_Oxylon", Price= 200},
-
+                new Good(){ Name="DB_Mefedron", Price= 56},
+                new Good(){ Name="DB_Oxylon", Price= 200},
+                new Good(){ Name="DB_Flakka", Price= 30},
             };
         }
     }

@@ -1,22 +1,25 @@
 ﻿using System;
+using System.Collections;
 
 namespace DependencyExample
 {
     public class GoodCalculator
     {
-        public GoodCalculator()
+        private readonly IGoodRepository _goodRepository;
+
+        public GoodCalculator(IGoodRepository goodRepository)
         {
-           
+            _goodRepository = goodRepository;
         }
-        public void Calculate()
+        public decimal CalculateSum()
         {
-            var listOfGood =new Database().GetGoods();
+            var listOfGood =_goodRepository.GetGoods();
             decimal sum = 0;
             foreach (var item in listOfGood)
             {
                 sum += item.Price;
             }
-            Console.WriteLine(sum);
+            return sum;
         }
     }
 }

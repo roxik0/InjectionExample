@@ -9,7 +9,8 @@ namespace DependencyExample
     {
         static void Main(string[] args)
         {
-            new GoodCalculator().Calculate();
+            var sum=new GoodCalculator(new Database()).CalculateSum();
+            Console.WriteLine(sum);
             Console.ReadKey();
 
         }
