@@ -1,11 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace DependencyExample
 {
     public class MsSqlDatabase:IRepository
     {
+        public MsSqlDatabase()
+        {
+              Console.WriteLine("Run");
+        }
         public IEnumerable<Good> GetDrugs()
         {
+            
             return new List<Good>()
             {
                 new Good(){ Name="Mefedron", Price= 56},

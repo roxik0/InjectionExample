@@ -11,7 +11,7 @@ namespace DependencyExample
         static void Main(string[] args)
         {
             IKernel myApp=new StandardKernel();
-
+            myApp.Bind<IRepository>().To<MsSqlDatabase>().InSingletonScope();
             IKernel myAzure = new StandardKernel();
             myAzure.Bind<IRepository>().To<AzureDatabase>();
 
