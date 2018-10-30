@@ -9,8 +9,8 @@ namespace DependencyExample
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Lekarstwa:" + new DrugCalculator(new Database()).CalculateSum());
-            Console.WriteLine("Sprzęt Medyczny:" + new HardwareCalculator(new Database()).CalculateSum());
+            Console.WriteLine("Lekarstwa:" + new DrugCalculator(new AzureDatabase()).CalculateSum());
+            Console.WriteLine("Sprzęt Medyczny:" + new HardwareCalculator(new AzureDatabase()).CalculateSum());
             Console.WriteLine("Wartość Sklepu:" + new DrugStore().GetAllGoodsValue());
 
             Console.ReadKey();

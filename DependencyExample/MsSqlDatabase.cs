@@ -2,7 +2,7 @@
 
 namespace DependencyExample
 {
-    public class Database:IRepository
+    public class MsSqlDatabase:IRepository
     {
         public IEnumerable<Good> GetDrugs()
         {
