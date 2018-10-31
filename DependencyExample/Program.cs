@@ -3,21 +3,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ninject;
+using Ninject.Modules;
+using Ninject.Planning.Bindings;
 
 namespace DependencyExample
 {
+
+    public class NiceModule : NinjectModule
+    {
+        public override void Load()
+        {
+            Bind<IRepository>().To<MsSqlDatabase>().WhenInjectedInto<DrugCalculator>();
+            Bind<DrugCalculator>().ToSelf();
+            Bind<IRepository>().To<AzureDatabase>();
+
+        }
+    }
+
+    public class MyClass : Attribute
+    {
+     }
+    
     partial class Program
     {
         static void Main(string[] args)
         {
-            IKernel myApp=new StandardKernel();
-            myApp.Bind<IRepository>().To<MsSqlDatabase>().InSingletonScope();
-            IKernel myAzure = new StandardKernel();
-            myAzure.Bind<IRepository>().To<AzureDatabase>();
+            IKernel myApp=new StandardKernel(new NiceModule());
 
-
-            Console.WriteLine("Lekarstwa:" + new DrugCalculator(myApp.Get<IRepository>()).CalculateSum());
-            Console.WriteLine("Sprzęt Medyczny:" + new HardwareCalculator(myAzure.Get<IRepository>()).CalculateSum());
+            var drugCalculator = myApp.Get<DrugCalculator>();
+            Console.WriteLine("Lekarstwa:" + drugCalculator.CalculateSum());
+            Console.WriteLine("Sprzęt Medyczny:" + new HardwareCalculator(myApp.Get<IRepository>()).CalculateSum());
             Console.WriteLine("Wartość Sklepu:" + new DrugStore(myApp.Get<IRepository>()).GetAllGoodsValue());
 
             Console.ReadKey();

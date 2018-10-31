@@ -7,6 +7,11 @@ namespace DependencyExample
     {
         private readonly IRepository _repository;
 
+        public HardwareCalculator()
+        {
+            
+        }
+       
         public HardwareCalculator(IRepository repository)
         {
             _repository = repository;

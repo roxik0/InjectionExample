@@ -1,5 +1,8 @@
-﻿namespace DependencyExample
+﻿using Ninject;
+
+namespace DependencyExample
 {
+    [MyClass]
     public class DrugCalculator
     {
         private readonly IRepository _repository;
