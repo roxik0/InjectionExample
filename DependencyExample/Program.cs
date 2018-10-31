@@ -9,31 +9,26 @@ using Ninject.Planning.Bindings;
 namespace DependencyExample
 {
 
-    public class NiceModule : NinjectModule
-    {
-        public override void Load()
-        {
-            Bind<IRepository>().To<MsSqlDatabase>().WhenInjectedInto<DrugCalculator>();
-            Bind<DrugCalculator>().ToSelf();
-            Bind<IRepository>().To<AzureDatabase>();
-
-        }
-    }
-
-    public class MyClass : Attribute
-    {
-     }
     
     partial class Program
     {
         static void Main(string[] args)
         {
-            IKernel myApp=new StandardKernel(new NiceModule());
+            IKernel nInjectContainer=new StandardKernel();
+            nInjectContainer.Bind<IRepository>().To<MsSqlDatabase>().WhenInjectedInto<DrugCalculator>();
+            nInjectContainer.Bind<DrugCalculator>().ToSelf();
+            nInjectContainer.Bind<HardwareCalculator>().ToSelf();
+            nInjectContainer.Bind<DrugStore>().ToSelf();
 
-            var drugCalculator = myApp.Get<DrugCalculator>();
+
+            nInjectContainer.Bind<IRepository>().To<AzureDatabase>();
+
+            var drugCalculator = nInjectContainer.Get<DrugCalculator>();
+
+
             Console.WriteLine("Lekarstwa:" + drugCalculator.CalculateSum());
-            Console.WriteLine("Sprzęt Medyczny:" + new HardwareCalculator(myApp.Get<IRepository>()).CalculateSum());
-            Console.WriteLine("Wartość Sklepu:" + new DrugStore(myApp.Get<IRepository>()).GetAllGoodsValue());
+            Console.WriteLine("Sprzęt Medyczny:" +nInjectContainer.Get<HardwareCalculator>().CalculateSum());
+            Console.WriteLine("Wartość Sklepu:" + nInjectContainer.Get<DrugStore>().GetAllGoodsValue());
 
             Console.ReadKey();
             
