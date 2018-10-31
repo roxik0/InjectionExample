@@ -15,13 +15,16 @@ namespace DependencyExample
         static void Main(string[] args)
         {
             IKernel nInjectContainer=new StandardKernel();
+            nInjectContainer.Bind<IRepository>().To<AzureDatabase>();
             nInjectContainer.Bind<IRepository>().To<MsSqlDatabase>().WhenInjectedInto<DrugCalculator>();
             nInjectContainer.Bind<DrugCalculator>().ToSelf();
             nInjectContainer.Bind<HardwareCalculator>().ToSelf();
             nInjectContainer.Bind<DrugStore>().ToSelf();
+            nInjectContainer.Bind<IUserPrivileges>().To<UserPrivileges>();
 
 
-            nInjectContainer.Bind<IRepository>().To<AzureDatabase>();
+
+
 
             var drugCalculator = nInjectContainer.Get<DrugCalculator>();
 
@@ -35,6 +38,4 @@ namespace DependencyExample
 
         }
     }
-
-  
 }

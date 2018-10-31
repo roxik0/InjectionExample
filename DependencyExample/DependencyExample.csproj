@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AzureDatabase.cs" />
+    <Compile Include="IUserPrivileges.cs" />
     <Compile Include="MsSqlDatabase.cs" />
     <Compile Include="DrugCalculator.cs" />
     <Compile Include="DrugStore.cs" />
